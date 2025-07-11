@@ -1,0 +1,40 @@
+{% extends 'jogo/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Cadastrar Palavra{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Nova Palavra</h2>
+<form method="post" class="w-50">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="mb-3">
+    {{ form.tema.label_tag }}
+    {{ form.tema|add_class:"form-select" }}
+    {{ form.tema.errors }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.texto.label_tag }}
+    {{ form.texto|add_class:"form-control" }}
+    {{ form.texto.errors }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.dica.label_tag }}
+    {{ form.dica|add_class:"form-control" }}
+    {{ form.dica.errors }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.explicacao.label_tag }}
+    {{ form.explicacao|add_class:"form-control" }}
+    {{ form.explicacao.errors }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Salvar</button>
+  <a href="{% url 'lista_temas' %}" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  body {
+    font-family: Courier, monospace;
+    margin: 20px;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+  }
+  .tema {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 40px;
+    font-size: 20px;
+  }
+  .forca {
+    white-space: pre;
+    font-size: 28px;
+    margin: 0 auto 50px auto;
+    text-align: left;
+    line-height: 1;
+  }
+  .palavra {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 80px;
+    font-size: 32px;
+    letter-spacing: 20px;
+    font-weight: bold;
+    user-select: none;
+  }
+  .letras-erradas {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Atividade: Jogo da Forca</h1>
+<div class="tema">Tema: {{ tema.nome }}</div>
+
+{% for palavra in palavras %}
+<div class="atividade">
+
+<pre class="forca">
+  +----+
+  |    |
+  |
+  |
+  |
+  |
+ _|_
+</pre>
+
+<div class="palavra" aria-label="Espaços da palavra">
+  {% for letra in palavra.texto %}
+    {% if letra == " " %}
+      &nbsp;&nbsp;&nbsp;
+    {% else %}
+      _
+    {% endif %}
+  {% endfor %}
+</div>
+
+<div class="letras-erradas">
+  Letras erradas: ________________________________________
+</div>
+
+</div>
+{% endfor %}
+
+</body>
+</html>

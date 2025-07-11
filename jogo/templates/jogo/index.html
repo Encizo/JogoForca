@@ -1,0 +1,99 @@
+{% extends 'jogo/base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <h1 class="mb-4">Bem-vindo ao Jogo da Forca!</h1>
+  <a href="{% url 'lista_temas' %}" class="btn btn-primary btn-lg mb-5">Jogar Agora!</a>
+</div>
+
+<div class="container">
+  <h3>Como Jogar:</h3>
+  <p class="lead">
+    O objetivo do jogo é adivinhar a palavra secreta, letra por letra, antes de cometer 6 erros.
+  </p>
+
+  <ul class="list-group mb-4">
+    <li class="list-group-item">
+      🔤 Digite uma <strong>letra</strong> no campo e clique em <strong>"Tentar Letra"</strong> para adivinhar.
+    </li>
+    <li class="list-group-item">
+      ❓ Clique em <strong>"Mostrar Dica"</strong> para exibir uma dica (se disponível).
+    </li>
+    <li class="list-group-item">
+      🧠 Acha que já sabe a palavra? Use <strong>"Chutar Palavra"</strong> para arriscar!
+    </li>
+    <li class="list-group-item">
+      😵 A cada erro, uma parte do bonequinho é desenhada. Ao errar 6 vezes, você perde!
+    </li>
+  </ul>
+
+  <h4 class="mb-3"></h4>
+
+  <div class="row text-center justify-content-center">
+    <div class="col-md-2">
+      <svg height="200" width="150">
+        <!-- Base da forca -->
+        <line x1="10" y1="180" x2="140" y2="180" stroke="black" stroke-width="4" />
+        <line x1="40" y1="180" x2="40" y2="20" stroke="black" stroke-width="4" />
+        <line x1="40" y1="20" x2="100" y2="20" stroke="black" stroke-width="4" />
+        <line x1="100" y1="20" x2="100" y2="40" stroke="black" stroke-width="4" />
+      </svg>
+      <p>0 erros</p>
+    </div>
+
+    <div class="col-md-2">
+      <svg height="200" width="150">
+        <line x1="10" y1="180" x2="140" y2="180" stroke="black" stroke-width="4" />
+        <line x1="40" y1="180" x2="40" y2="20" stroke="black" stroke-width="4" />
+        <line x1="40" y1="20" x2="100" y2="20" stroke="black" stroke-width="4" />
+        <line x1="100" y1="20" x2="100" y2="40" stroke="black" stroke-width="4" />
+        <circle cx="100" cy="60" r="20" stroke="black" stroke-width="4" fill="white"/>
+      </svg>
+      <p>1 erro</p>
+    </div>
+
+    <div class="col-md-2">
+      <svg height="200" width="150">
+        <line x1="10" y1="180" x2="140" y2="180" stroke="black" stroke-width="4" />
+        <line x1="40" y1="180" x2="40" y2="20" stroke="black" stroke-width="4" />
+        <line x1="40" y1="20" x2="100" y2="20" stroke="black" stroke-width="4" />
+        <line x1="100" y1="20" x2="100" y2="40" stroke="black" stroke-width="4" />
+        <circle cx="100" cy="60" r="20" stroke="black" stroke-width="4" fill="white"/>
+        <line x1="100" y1="80" x2="100" y2="130" stroke="black" stroke-width="4" />
+      </svg>
+      <p>2 erros</p>
+    </div>
+
+    <div class="col-md-2">
+      <svg height="200" width="150">
+        <line x1="10" y1="180" x2="140" y2="180" stroke="black" stroke-width="4" />
+        <line x1="40" y1="180" x2="40" y2="20" stroke="black" stroke-width="4" />
+        <line x1="40" y1="20" x2="100" y2="20" stroke="black" stroke-width="4" />
+        <line x1="100" y1="20" x2="100" y2="40" stroke="black" stroke-width="4" />
+        <circle cx="100" cy="60" r="20" stroke="black" stroke-width="4" fill="white"/>
+        <line x1="100" y1="80" x2="100" y2="130" stroke="black" stroke-width="4" />
+        <line x1="100" y1="90" x2="75" y2="115" stroke="black" stroke-width="4" />
+      </svg>
+      <p>3 erros</p>
+    </div>
+
+    <div class="col-md-2">
+      <svg height="200" width="150">
+        <line x1="10" y1="180" x2="140" y2="180" stroke="black" stroke-width="4" />
+        <line x1="40" y1="180" x2="40" y2="20" stroke="black" stroke-width="4" />
+        <line x1="40" y1="20" x2="100" y2="20" stroke="black" stroke-width="4" />
+        <line x1="100" y1="20" x2="100" y2="40" stroke="black" stroke-width="4" />
+        <circle cx="100" cy="60" r="20" stroke="black" stroke-width="4" fill="white"/>
+        <line x1="100" y1="80" x2="100" y2="130" stroke="black" stroke-width="4" />
+        <line x1="100" y1="90" x2="75" y2="115" stroke="black" stroke-width="4" />
+        <line x1="100" y1="90" x2="125" y2="115" stroke="black" stroke-width="4" />
+        <line x1="100" y1="130" x2="75" y2="165" stroke="black" stroke-width="4" />
+        <line x1="100" y1="130" x2="125" y2="165" stroke="black" stroke-width="4" />
+      </svg>
+      <p>6 erros - fim de jogo!</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

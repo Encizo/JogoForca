@@ -1,0 +1,11 @@
+{% extends 'jogo/base.html' %}
+{% block title %}Nova Palavra{% endblock %}
+
+{% block content %}
+  <h2>Cadastrar Nova Palavra</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </form>
+{% endblock %}

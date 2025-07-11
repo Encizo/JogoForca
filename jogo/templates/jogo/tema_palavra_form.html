@@ -1,0 +1,20 @@
+{% extends 'jogo/base.html' %}
+{% block title %}Cadastrar Tema e Palavra{% endblock %}
+
+{% block content %}
+  <h2>Cadastrar Novo Tema</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ tema_form.as_p }}
+    <button type="submit" name="submit_tema" class="btn btn-primary mb-3">Salvar Tema</button>
+  </form>
+
+  <hr>
+
+  <h2>Cadastrar Nova Palavra</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ palavra_form.as_p }}
+    <button type="submit" name="submit_palavra" class="btn btn-primary">Salvar Palavra</button>
+  </form>
+{% endblock %}

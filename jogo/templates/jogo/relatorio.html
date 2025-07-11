@@ -1,0 +1,44 @@
+{% extends 'jogo/base.html' %}
+{% block title %}Relatório{% endblock %}
+
+{% block content %}
+  <h2>Relatório de Jogadas – Tema: "{{ tema.nome }}"</h2>
+
+  <form method="post" class="mb-4">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-4">{{ form.data_inicio.label_tag }} {{ form.data_inicio }}</div>
+      <div class="col-md-4">{{ form.data_fim.label_tag }} {{ form.data_fim }}</div>
+      <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary">Filtrar por Data</button>
+      </div>
+    </div>
+  </form>
+
+  {% if partidas %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Aluno</th>
+          <th>Palavra</th>
+          <th>Acertou?</th>
+          <th>Tentativas</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for partida in partidas %}
+          <tr>
+            <td>{{ partida.aluno.username|default:"Anônimo" }}</td>
+            <td>{{ partida.palavra.texto }}</td>
+            <td>{{ partida.acertou|yesno:"Sim,Não" }}</td>
+            <td>{{ partida.tentativas }}</td>
+            <td>{{ partida.data|date:"d/m/Y H:i" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% elif partidas is not None %}
+    <p>Nenhuma partida encontrada para os filtros selecionados.</p>
+  {% endif %}
+{% endblock %}

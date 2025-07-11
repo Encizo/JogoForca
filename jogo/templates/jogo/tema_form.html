@@ -1,0 +1,22 @@
+{% extends 'jogo/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Cadastrar Tema{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Novo Tema</h2>
+<form method="post" class="w-50">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="mb-3">
+    {{ form.nome.label_tag }}
+    {{ form.nome|add_class:"form-control" }}
+    {{ form.nome.errors }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Salvar</button>
+  <a href="{% url 'lista_temas' %}" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+{% endblock %}

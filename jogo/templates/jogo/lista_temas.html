@@ -1,0 +1,63 @@
+{% extends 'jogo/base.html' %}
+{% block title %}Lista de Temas{% endblock %}
+
+{% block content %}
+  <h1>Temas Cadastrados</h1>
+
+  {% if is_professor %}
+    <a href="{% url 'cadastro_tema_palavra' %}" class="btn btn-success mb-3">Cadastrar Tema e Palavra</a>
+  {% endif %}
+
+  <ul class="list-group">
+    {% for tema in temas %}
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ tema.nome }}</strong>
+            <small class="text-muted">(Criado por: {{ tema.criado_por.username }})</small>
+          </div>
+
+          <div class="btn-group">
+            {% if user.is_authenticated %}
+              <a href="{% url 'jogar_por_tema' tema.id %}" class="btn btn-primary btn-sm">Jogar</a>
+            {% else %}
+              <a href="{% url 'jogar_por_tema' tema.id %}?anonimo=1" class="btn btn-outline-secondary btn-sm">Jogar como anônimo</a>
+            {% endif %}
+
+            {% if is_professor and tema.criado_por == user %}
+              <a href="{% url 'relatorio' %}?tema={{ tema.id }}" class="btn btn-outline-dark btn-sm">Relatório</a>
+              <a href="{% url 'gerar_pdf' tema.id %}" class="btn btn-outline-secondary btn-sm">PDF</a>
+
+              <form action="{% url 'excluir_tema' tema.id %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este tema?')">Excluir Tema</button>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+
+        {% if is_professor and tema.criado_por == user %}
+          <ul class="mt-2">
+            {% for palavra in tema.palavras.all %}
+              <li class="d-flex justify-content-between align-items-center">
+                <div>
+                  {{ palavra.texto }} <small class="text-muted">({{ palavra.dica }})</small>
+                </div>
+                <div class="btn-group">
+                  <form action="{% url 'excluir_palavra' palavra.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Excluir palavra {{ palavra.texto }}?')">Excluir Palavra</button>
+                  </form>
+                </div>
+              </li>
+            {% empty %}
+              <li><small class="text-muted">Sem palavras cadastradas.</small></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li class="list-group-item">Nenhum tema cadastrado ainda.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
